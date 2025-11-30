@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Austin BME Research Internship Navigator</title>
+    <title>Austin BME Research Internship Navigator (Expanded)</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
@@ -101,15 +101,11 @@
                             Internship Navigator</span></span>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button onclick="scrollToSection('dashboard')"
-                        class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">Overview</button>
                     <button onclick="scrollToSection('opportunities')"
-                        class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">Opportunities</button>
-                    <button onclick="scrollToSection('enovis-focus')"
-                        class="bg-sky-50 text-sky-700 hover:bg-sky-100 px-3 py-2 rounded-md text-sm font-medium">Enovis
-                        Strategy</button>
+                        class="bg-sky-600 text-white hover:bg-sky-700 px-3 py-2 rounded-md text-sm font-medium">Explore
+                        Opportunities</button>
                     <button onclick="scrollToSection('action-plan')"
-                        class="bg-sky-600 text-white hover:bg-sky-700 px-3 py-2 rounded-md text-sm font-medium">Action
+                        class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">Action
                         Plan</button>
                 </div>
             </div>
@@ -119,158 +115,46 @@
     <!-- Main Content -->
     <main class="flex-grow">
 
-        <!-- SECTION 1: HERO & DASHBOARD -->
-        <section id="dashboard" class="py-12 bg-white">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="text-center mb-12">
-                    <h1 class="text-4xl font-bold text-slate-900 mb-4">Research Pathways in Austin, TX</h1>
-                    <p class="text-lg text-slate-600 max-w-2xl mx-auto">
-                        For a Junior BME at Texas A&M, Austin offers a unique blend of established medical device giants
-                        and a booming academic research sector.
-                        Here is your command center for navigating the ecosystem.
-                    </p>
-                </div>
-
-                <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 items-center">
-                    <!-- Text Context -->
-                    <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
-                        <h2 class="text-xl font-semibold text-slate-800 mb-4">The Austin Landscape</h2>
-                        <p class="text-slate-600 mb-4">
-                            Unlike Houston (Medical Center focus) or Dallas (Corporate HQs), Austin's bio-sector is
-                            defined by
-                            <strong class="text-sky-600">Medical Devices</strong> (Orthopedics, Spine) and <strong
-                                class="text-teal-600">High-Tech Bio</strong> (Bioinformatics, Wearables).
-                        </p>
-                        <div class="space-y-4">
-                            <div class="flex items-center justify-between p-3 bg-white rounded shadow-sm">
-                                <span class="font-medium text-slate-700">Industry (Medical Device)</span>
-                                <span class="text-xs font-bold bg-sky-100 text-sky-800 px-2 py-1 rounded">High
-                                    Competition</span>
-                            </div>
-                            <div class="flex items-center justify-between p-3 bg-white rounded shadow-sm">
-                                <span class="font-medium text-slate-700">Academic (UT Austin/Dell Med)</span>
-                                <span class="text-xs font-bold bg-teal-100 text-teal-800 px-2 py-1 rounded">High
-                                    Opportunity</span>
-                            </div>
-                            <div class="flex items-center justify-between p-3 bg-white rounded shadow-sm">
-                                <span class="font-medium text-slate-700">Startups (Capital Factory)</span>
-                                <span
-                                    class="text-xs font-bold bg-purple-100 text-purple-800 px-2 py-1 rounded">Networking
-                                    Heavy</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <!-- Landscape Chart -->
-                    <div class="bg-white p-4 rounded-xl shadow-sm border border-slate-100">
-                        <div class="chart-container">
-                            <canvas id="landscapeChart"></canvas>
-                        </div>
-                        <p class="text-center text-xs text-slate-400 mt-2">Relative distribution of BME-relevant
-                            research roles in Austin</p>
-                    </div>
-                </div>
+        <!-- HERO -->
+        <section class="bg-white py-10 border-b border-slate-200">
+            <div class="max-w-7xl mx-auto px-4 text-center">
+                <h1 class="text-3xl font-bold text-slate-900">The Expanded Austin BME List</h1>
+                <p class="mt-2 text-slate-600">
+                    Beyond the "Big 3". Explore mid-size biotech, diagnostics, and engineering consulting firms hiring
+                    right now.
+                </p>
             </div>
         </section>
 
         <!-- SECTION 2: OPPORTUNITY EXPLORER -->
-        <section id="opportunities" class="py-12 bg-slate-50 border-t border-slate-200">
+        <section id="opportunities" class="py-12 bg-slate-50">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="flex flex-col md:flex-row justify-between items-end mb-8">
-                    <div>
-                        <h2 class="text-3xl font-bold text-slate-900">Opportunity Explorer</h2>
-                        <p class="text-slate-600 mt-2 max-w-2xl">
-                            Toggle between Industry (Corporate R&D) and Academic (University Labs). Click "View
-                            Strategy" to see how to approach them.
-                        </p>
-                    </div>
-                    <!-- Toggle Controls -->
-                    <div class="bg-white p-1 rounded-lg border border-slate-300 inline-flex mt-4 md:mt-0">
-                        <button id="btn-industry" onclick="toggleOpportunities('industry')"
-                            class="px-4 py-2 text-sm font-medium rounded-md bg-sky-500 text-white shadow-sm transition-colors">Industry
-                            Giants</button>
-                        <button id="btn-academic" onclick="toggleOpportunities('academic')"
-                            class="px-4 py-2 text-sm font-medium rounded-md text-slate-600 hover:bg-slate-100 transition-colors">UT
-                            & Academic Labs</button>
-                    </div>
+
+                <!-- Filter Tabs -->
+                <div class="flex flex-wrap gap-2 mb-8 justify-center">
+                    <button id="btn-device" onclick="toggleOpportunities('device')"
+                        class="px-5 py-2 text-sm font-bold rounded-full bg-sky-500 text-white shadow-md transition-all transform hover:scale-105">Medical
+                        Devices (Hardware)</button>
+                    <button id="btn-bio" onclick="toggleOpportunities('bio')"
+                        class="px-5 py-2 text-sm font-bold rounded-full text-slate-600 bg-white hover:bg-teal-50 shadow-sm transition-all border border-slate-200">Biotech
+                        & Diagnostics</button>
+                    <button id="btn-consulting" onclick="toggleOpportunities('consulting')"
+                        class="px-5 py-2 text-sm font-bold rounded-full text-slate-600 bg-white hover:bg-purple-50 shadow-sm transition-all border border-slate-200">Consulting
+                        & Startups</button>
+                    <button id="btn-academic" onclick="toggleOpportunities('academic')"
+                        class="px-5 py-2 text-sm font-bold rounded-full text-slate-600 bg-white hover:bg-orange-50 shadow-sm transition-all border border-slate-200">Academic
+                        Research</button>
                 </div>
 
                 <!-- Dynamic Grid for Cards -->
-                <div id="opportunity-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+                <div id="opportunity-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 animate-fade-in">
                     <!-- Cards will be injected here via JS -->
                 </div>
             </div>
         </section>
 
-        <!-- SECTION 3: ENOVIS DEEP DIVE -->
-        <section id="enovis-focus" class="py-12 bg-white border-t border-slate-200">
-            <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div
-                    class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
-                    <div class="absolute top-0 right-0 p-12 opacity-10">
-                        <span class="text-9xl font-bold">E</span>
-                    </div>
-
-                    <div class="relative z-10">
-                        <div class="flex items-center space-x-3 mb-6">
-                            <span
-                                class="px-3 py-1 bg-sky-500 text-xs font-bold rounded uppercase tracking-wider">Primary
-                                Target</span>
-                            <h2 class="text-3xl font-bold">Cracking Enovis (Austin)</h2>
-                        </div>
-
-                        <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
-                            <!-- Left Column: The Intel -->
-                            <div class="col-span-2">
-                                <h3 class="text-xl font-semibold mb-4 text-sky-300">The "Surgical & Foot/Ankle" Focus
-                                </h3>
-                                <p class="text-slate-300 mb-6 leading-relaxed">
-                                    Enovis (formerly DJO Global) in Austin has a heavy footprint in
-                                    <strong>Reconstructive Surgery</strong> and <strong>Orthopedics</strong>.
-                                    As a BME Junior, generic applications often fail. You need to tailor your narrative
-                                    to <em>Biomechanics, Material Science, and FDA Quality Controls</em>.
-                                </p>
-
-                                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
-                                    <div class="bg-slate-700/50 p-4 rounded-lg border border-slate-600">
-                                        <h4 class="font-bold text-sky-400 mb-2">Key Keywords for Resume</h4>
-                                        <ul class="text-sm text-slate-300 space-y-1 list-disc list-inside">
-                                            <li>Surgical Planning</li>
-                                            <li>Implant Design (CAD/SolidWorks)</li>
-                                            <li>Finite Element Analysis (FEA)</li>
-                                            <li>ISO 13485 / FDA 510(k) awareness</li>
-                                        </ul>
-                                    </div>
-                                    <div class="bg-slate-700/50 p-4 rounded-lg border border-slate-600">
-                                        <h4 class="font-bold text-sky-400 mb-2">How to Network</h4>
-                                        <ul class="text-sm text-slate-300 space-y-1">
-                                            <li class="flex items-start"><span class="mr-2">🔹</span>Find "R&D
-                                                Engineers" at Enovis Austin on LinkedIn.</li>
-                                            <li class="flex items-start"><span class="mr-2">🔹</span>Message Aggies
-                                                alumni specifically ("Howdy! Junior BME here...").</li>
-                                            <li class="flex items-start"><span class="mr-2">🔹</span>Ask about their
-                                                "STAR" internship program cycles.</li>
-                                        </ul>
-                                    </div>
-                                </div>
-                            </div>
-
-                            <!-- Right Column: Skills Radar -->
-                            <div class="bg-white/5 rounded-xl p-4 flex flex-col items-center justify-center">
-                                <h4 class="text-sm font-semibold text-slate-300 mb-2 text-center">Ideal Candidate
-                                    Profile vs. Avg Student</h4>
-                                <div class="chart-container" style="height: 250px;">
-                                    <canvas id="enovisRadarChart"></canvas>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
         <!-- SECTION 4: ACTION PLAN & TIMELINE -->
-        <section id="action-plan" class="py-12 bg-slate-50 border-t border-slate-200">
+        <section id="action-plan" class="py-12 bg-white border-t border-slate-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="mb-10">
                     <h2 class="text-3xl font-bold text-slate-900">Strategic Timeline</h2>
@@ -282,22 +166,22 @@
 
                 <!-- Timeline Controls -->
                 <div class="flex justify-center mb-8">
-                    <div class="bg-white rounded-full shadow p-1 flex space-x-2">
+                    <div class="bg-slate-100 rounded-full shadow-inner p-1 flex space-x-2">
                         <button onclick="updateTimeline('now')"
                             class="timeline-btn active px-6 py-2 rounded-full text-sm font-medium bg-sky-500 text-white transition-all">Now
                             (Nov/Dec)</button>
                         <button onclick="updateTimeline('early_spring')"
-                            class="timeline-btn px-6 py-2 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-100 transition-all">Early
+                            class="timeline-btn px-6 py-2 rounded-full text-sm font-medium text-slate-600 hover:bg-white transition-all">Early
                             Spring (Jan/Feb)</button>
                         <button onclick="updateTimeline('late_spring')"
-                            class="timeline-btn px-6 py-2 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-100 transition-all">Late
+                            class="timeline-btn px-6 py-2 rounded-full text-sm font-medium text-slate-600 hover:bg-white transition-all">Late
                             Spring (Mar/Apr)</button>
                     </div>
                 </div>
 
                 <!-- Dynamic Timeline Content -->
                 <div class="bg-white rounded-xl shadow border border-slate-200 p-8">
-                    <div id="timeline-content" class="grid grid-cols-1 md:grid-cols-2 gap-8 animate-fade-in">
+                    <div id="timeline-content" class="grid grid-cols-1 md:grid-cols-2 gap-8">
                         <!-- Left: Tasks -->
                         <div>
                             <h3 id="timeline-title" class="text-xl font-bold text-slate-800 mb-4">Winter Break Grind
@@ -384,32 +268,24 @@
 
     <!-- LOGIC -->
     <script>
-        // --- DATA STORE ---
+        // --- EXPANDED DATA STORE ---
         const opportunitiesData = {
-            industry: [
+            device: [
                 {
-                    name: "Enovis (DJO)",
+                    name: "Enovis (DJO Global)",
                     location: "North Austin",
                     tags: ["Orthopedics", "Surgical", "Rehab"],
-                    desc: "A leader in orthopedic devices. Look for 'R&D Intern' or 'Quality Engineering Intern' roles. High value on CAD and mechanical testing.",
+                    desc: "A leader in orthopedic devices. Huge R&D center here for reconstructive surgery.",
                     strategy: "Don't just apply online. Mention 'STAR Internship' in your cover letter. Highlight any course projects involving SolidWorks or Instron testing.",
                     link: "https://www.enovis.com/careers"
                 },
                 {
-                    name: "Abbott",
+                    name: "Abbott (Neuromodulation)",
                     location: "North Austin",
-                    tags: ["Cardio", "Neuromodulation"],
-                    desc: "Major hub for Neuromodulation. Very competitive. Focus on electrical/neural engineering aspects of BME.",
+                    tags: ["Neurotech", "Implants", "DBS"],
+                    desc: "Major hub for Neuromodulation (Deep Brain Stimulation). Focus on electrical/neural engineering.",
                     strategy: "Abbott recruits heavily in Fall, but Spring postings exist. Emphasize data analysis (Python/MATLAB) as Neuromod uses heavy signal processing.",
                     link: "https://www.abbott.com/careers.html"
-                },
-                {
-                    name: "Stryker",
-                    location: "Remote/Travel (Austin Sales/Support)",
-                    tags: ["MedSurg", "Neurotech"],
-                    desc: "While R&D is huge elsewhere, Austin has field clinical engineering roles which are great entry points.",
-                    strategy: "Look for 'Field Clinical Engineer' or 'OnSite Specialist' roles. These are great for BMEs who want to be in the OR rather than a lab.",
-                    link: "https://careers.stryker.com/"
                 },
                 {
                     name: "Zimmer Biomet",
@@ -420,12 +296,88 @@
                     link: "https://careers.zimmerbiomet.com/"
                 },
                 {
-                    name: "Hanger Clinic / Hanger, Inc.",
+                    name: "Hanger, Inc.",
                     location: "North Austin (HQ)",
-                    tags: ["Prosthetics", "Orthotics"],
-                    desc: "Headquartered in Austin. Incredible for rehab engineering and biomechanics research.",
-                    strategy: "This is HQ. Look for 'Clinical Research' roles specifically. Mention any gait analysis experience.",
+                    tags: ["Prosthetics", "Orthotics", "Rehab"],
+                    desc: "Headquarters of the nation's leading provider of O&P. They do massive clinical research studies.",
+                    strategy: "Look for 'Clinical Research' roles specifically. Mention gait analysis, biomechanics, or patient outcome studies.",
                     link: "https://corporate.hanger.com/careers/"
+                },
+                {
+                    name: "Ottobock",
+                    location: "Austin",
+                    tags: ["Prosthetics", "Exoskeletons"],
+                    desc: "German prosthetics giant with a strong Austin presence. Known for high-tech knees and hands.",
+                    strategy: "They value mechanical aptitude highly. Show photos of things you've built in your portfolio.",
+                    link: "https://www.ottobock.com/en-us/career"
+                },
+                {
+                    name: "Stryker",
+                    location: "Austin (Field/Sales)",
+                    tags: ["Surgical", "Navigation"],
+                    desc: "Mostly commercial/field roles in Austin, but 'Field Clinical Engineer' is a great entry point.",
+                    strategy: "Apply for 'OnSite Specialist' or 'Field Clinical'. You will be in the OR supporting surgeons using the tech.",
+                    link: "https://careers.stryker.com/"
+                }
+            ],
+            bio: [
+                {
+                    name: "Natera",
+                    location: "Austin",
+                    tags: ["Genetics", "Diagnostics", "cfDNA"],
+                    desc: "Huge growth in Austin. They do non-invasive prenatal testing and cancer screening via blood.",
+                    strategy: "They need 'Automation Engineers' (robots moving liquids) and Data Analysts. Highlight Python or lab automation skills.",
+                    link: "https://www.natera.com/careers/"
+                },
+                {
+                    name: "Luminex (DiaSorin)",
+                    location: "North Austin",
+                    tags: ["Bioassays", "Immunology"],
+                    desc: "Develops biological testing technologies. Great for BMEs with strong wet-lab and chemistry skills.",
+                    strategy: "Look for 'System Integration Intern'. This role bridges the gap between the biology (assays) and the hardware (machines).",
+                    link: "https://www.luminexcorp.com/careers/"
+                },
+                {
+                    name: "Thermo Fisher Scientific",
+                    location: "South Austin",
+                    tags: ["Bioproduction", "Pharma"],
+                    desc: "Massive facility focused on bioproduction and genetic sequencing tools.",
+                    strategy: "They hire 'Manufacturing Engineers' and 'Quality Engineers' in droves. Good entry point for process engineering.",
+                    link: "https://jobs.thermofisher.com/global/en"
+                },
+                {
+                    name: "Signature Science",
+                    location: "Austin",
+                    tags: ["Biodefense", "Forensics"],
+                    desc: "Applied R&D for national security and public safety. Very science-heavy.",
+                    strategy: "You need US Citizenship for many roles here due to security clearance. Highlight rigorous lab protocols.",
+                    link: "https://www.signaturescience.com/careers/"
+                }
+            ],
+            consulting: [
+                {
+                    name: "StarFish Medical",
+                    location: "Austin/Remote",
+                    tags: ["Design", "Consulting"],
+                    desc: "A medical device design consulting firm. They build devices for other startups.",
+                    strategy: "Portfolio is King. You need to show your Senior Design project or personal CAD projects. They sell your design skills.",
+                    link: "https://starfishmedical.com/careers/"
+                },
+                {
+                    name: "Everglades (Moonlight)",
+                    location: "Austin",
+                    tags: ["Startups", "Incubator"],
+                    desc: "Look into local incubators like 'Texas Health CoLab'. Many tiny startups sit there.",
+                    strategy: "Don't apply online. Go to 'Austin MedTech Happy Hour' events or look at the member list of Dell Med's incubator and email founders.",
+                    link: "https://dellmed.utexas.edu/units/texas-health-colab"
+                },
+                {
+                    name: "Flex Health Solutions",
+                    location: "Austin",
+                    tags: ["Manufacturing", "Design"],
+                    desc: "Flex designs and builds products for Apple, but also huge medical devices. 'Sketch-to-Scale'.",
+                    strategy: "Apply for 'Process Engineer' or 'NPI (New Product Introduction)' roles. They teach you how to mass-produce devices.",
+                    link: "https://flex.com/careers"
                 }
             ],
             academic: [
@@ -499,7 +451,7 @@
             }
         };
 
-        let currentType = 'industry'; // Track current view for modal index mapping
+        let currentType = 'device'; // Default
 
         // --- RENDER FUNCTIONS ---
 
@@ -518,11 +470,17 @@
                     `<span class="text-xs font-semibold bg-slate-100 text-slate-600 px-2 py-1 rounded-full">${tag}</span>`
                 ).join('');
 
+                // Select Icon based on type
+                let icon = '🔬';
+                if (type === 'device') icon = '🦾';
+                if (type === 'bio') icon = '🧬';
+                if (type === 'consulting') icon = '💼';
+
                 card.innerHTML = `
                     <div>
                         <div class="flex justify-between items-start mb-2">
                             <h3 class="font-bold text-lg text-slate-800">${item.name}</h3>
-                            ${type === 'industry' ? '🏢' : '🔬'}
+                            <span class="text-2xl">${icon}</span>
                         </div>
                         <p class="text-xs text-slate-400 mb-3 flex items-center">📍 ${item.location}</p>
                         <div class="flex flex-wrap gap-2 mb-4">
@@ -539,16 +497,17 @@
         }
 
         function toggleOpportunities(type) {
-            const btnInd = document.getElementById('btn-industry');
-            const btnAca = document.getElementById('btn-academic');
+            // Reset all buttons
+            ['btn-device', 'btn-bio', 'btn-consulting', 'btn-academic'].forEach(id => {
+                const btn = document.getElementById(id);
+                btn.classList.remove('bg-sky-500', 'text-white', 'hover:scale-105');
+                btn.classList.add('bg-white', 'text-slate-600', 'hover:bg-slate-50');
+            });
 
-            if (type === 'industry') {
-                btnInd.className = "px-4 py-2 text-sm font-medium rounded-md bg-sky-500 text-white shadow-sm transition-colors";
-                btnAca.className = "px-4 py-2 text-sm font-medium rounded-md text-slate-600 hover:bg-slate-100 transition-colors";
-            } else {
-                btnAca.className = "px-4 py-2 text-sm font-medium rounded-md bg-teal-500 text-white shadow-sm transition-colors";
-                btnInd.className = "px-4 py-2 text-sm font-medium rounded-md text-slate-600 hover:bg-slate-100 transition-colors";
-            }
+            // Highlight Active
+            const activeBtn = document.getElementById(`btn-${type}`);
+            activeBtn.classList.remove('bg-white', 'text-slate-600', 'hover:bg-slate-50');
+            activeBtn.classList.add('bg-sky-500', 'text-white', 'hover:scale-105');
 
             renderOpportunities(type);
         }
@@ -588,7 +547,6 @@
             }, 200);
         }
 
-        // Close modal when clicking outside
         document.getElementById('details-modal').addEventListener('click', function (e) {
             if (e.target === this) {
                 closeModal();
@@ -601,12 +559,12 @@
 
             buttons.forEach(btn => {
                 btn.classList.remove('bg-sky-500', 'text-white', 'active');
-                btn.classList.add('text-slate-600', 'hover:bg-slate-100');
+                btn.classList.add('text-slate-600', 'hover:bg-white');
             });
 
             const activeButton = document.querySelector(`button[onclick*="'${phase}'"]`);
             if (activeButton) {
-                activeButton.classList.remove('text-slate-600', 'hover:bg-slate-100');
+                activeButton.classList.remove('text-slate-600', 'hover:bg-white');
                 activeButton.classList.add('bg-sky-500', 'text-white', 'active');
             }
 
@@ -628,73 +586,9 @@
             document.getElementById(id).scrollIntoView({ behavior: 'smooth' });
         }
 
-        // --- CHARTS INITIALIZATION ---
+        // --- INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
-            renderOpportunities('industry');
-
-            const ctx1 = document.getElementById('landscapeChart').getContext('2d');
-            new Chart(ctx1, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Medical Device (Industry)', 'Academic Research (UT/Dell)', 'Clinical Ops', 'Startups'],
-                    datasets: [{
-                        data: [40, 35, 10, 15],
-                        backgroundColor: ['#0ea5e9', '#14b8a6', '#64748b', '#a855f7'],
-                        borderWidth: 0
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    plugins: {
-                        legend: { position: 'bottom', labels: { boxWidth: 10, usePointStyle: true } }
-                    }
-                }
-            });
-
-            const ctx2 = document.getElementById('enovisRadarChart').getContext('2d');
-            new Chart(ctx2, {
-                type: 'radar',
-                data: {
-                    labels: ['CAD/SolidWorks', 'FDA Regs', 'Networking', 'GPA', 'Research Exp', 'Soft Skills'],
-                    datasets: [{
-                        label: 'You (BME Junior)',
-                        data: [70, 30, 50, 85, 60, 80],
-                        fill: true,
-                        backgroundColor: 'rgba(14, 165, 233, 0.2)',
-                        borderColor: '#0ea5e9',
-                        pointBackgroundColor: '#0ea5e9',
-                        pointBorderColor: '#fff',
-                        pointHoverBackgroundColor: '#fff',
-                        pointHoverBorderColor: '#0ea5e9'
-                    }, {
-                        label: 'Enovis Ideal',
-                        data: [90, 80, 70, 75, 80, 80],
-                        fill: true,
-                        backgroundColor: 'rgba(203, 213, 225, 0.2)',
-                        borderColor: '#cbd5e1',
-                        pointBackgroundColor: '#cbd5e1',
-                        pointBorderColor: '#fff',
-                        borderDash: [5, 5]
-                    }]
-                },
-                options: {
-                    responsive: true,
-                    maintainAspectRatio: false,
-                    scales: {
-                        r: {
-                            angleLines: { color: 'rgba(255, 255, 255, 0.2)' },
-                            grid: { color: 'rgba(255, 255, 255, 0.2)' },
-                            pointLabels: { color: '#cbd5e1' },
-                            ticks: { display: false }
-                        }
-                    },
-                    plugins: {
-                        legend: { position: 'bottom', labels: { color: '#cbd5e1' } }
-                    }
-                }
-            });
-
+            renderOpportunities('device'); // Initial render
             updateTimeline('now');
         });
 
