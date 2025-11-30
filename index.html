@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -8,90 +9,86 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
         @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
-        
+
         body {
             font-family: 'Inter', sans-serif;
-            background-color: #f8fafc; /* Warm neutral/light gray */
-            color: #334155; /* Slate 700 */
+            background-color: #f8fafc;
+            color: #334155;
         }
 
         /* Custom Scrollbar */
         ::-webkit-scrollbar {
             width: 8px;
         }
+
         ::-webkit-scrollbar-track {
-            background: #f1f5f9; 
-        }
-        ::-webkit-scrollbar-thumb {
-            background: #cbd5e1; 
-            border-radius: 4px;
-        }
-        ::-webkit-scrollbar-thumb:hover {
-            background: #94a3b8; 
+            background: #f1f5f9;
         }
 
-        /* Chart Container Utility - Strictly enforcing constraints */
+        ::-webkit-scrollbar-thumb {
+            background: #cbd5e1;
+            border-radius: 4px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #94a3b8;
+        }
+
         .chart-container {
             position: relative;
             width: 100%;
-            max-width: 600px; /* Max width constraint */
+            max-width: 600px;
             margin-left: auto;
             margin-right: auto;
-            height: 300px; /* Base height */
-            max-height: 400px; /* Max height constraint */
+            height: 300px;
+            max-height: 400px;
         }
-        
+
         @media (min-width: 768px) {
             .chart-container {
                 height: 350px;
             }
         }
 
-        /* Card Hover Effects */
         .interactive-card {
             transition: transform 0.2s ease, box-shadow 0.2s ease;
             cursor: pointer;
         }
+
         .interactive-card:hover {
             transform: translateY(-2px);
             box-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
-            border-color: #0ea5e9; /* Sky 500 */
-        }
-        .active-card {
-            border-color: #0ea5e9; /* Sky 500 */
-            background-color: #f0f9ff; /* Sky 50 */
-        }
-
-        /* Timeline Step */
-        .timeline-step.active .circle {
-            background-color: #0ea5e9;
             border-color: #0ea5e9;
         }
-        .timeline-step.active .text {
-            color: #0f172a;
-            font-weight: 600;
+
+        /* Modal Animation */
+        .modal-enter {
+            opacity: 0;
+            transform: scale(0.95);
+        }
+
+        .modal-enter-active {
+            opacity: 1;
+            transform: scale(1);
+            transition: opacity 0.2s ease-out, transform 0.2s ease-out;
+        }
+
+        .modal-exit {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .modal-exit-active {
+            opacity: 0;
+            transform: scale(0.95);
+            transition: opacity 0.2s ease-in, transform 0.2s ease-in;
         }
     </style>
-    <!-- Chosen Palette: "Medical Tech Calm" - White/Slate basics with Sky Blue (#0ea5e9) and Teal (#14b8a6) accents for a professional, clinical but modern feel. -->
-    
-    <!-- Application Structure Plan:
-         1. Hero Dashboard: High-level overview of the Austin BME landscape (Industry vs. Academia stats).
-         2. Opportunity Explorer: A dual-view section (Industry vs. Research Labs) allowing the user to toggle between corporate targets like Enovis and academic targets like UT Austin.
-         3. Enovis Strategy Hub: A dedicated "Deep Dive" section specifically for the user's primary interest, breaking down how to approach this specific company.
-         4. Timeline & Tactics: An interactive Gantt-style view showing what a Junior student should be doing Month-by-Month to land a spot.
-         WHY: This structure moves from the "What" (Landscape) to the "Who" (Targets) to the "How" (Strategy), directly answering the user's request for opportunities and guidance.
-    -->
-    
-    <!-- Visualization & Content Choices:
-         1. Landscape Breakdown (Doughnut Chart): Shows the ratio of Startups vs. Big Pharma vs. Academic Labs in Austin. Goal: Set expectations.
-         2. Skills Matrix (Radar Chart - Chart.js): Compares user's potential skills (BME general) vs. Market demand in Austin. Goal: Identify gaps.
-         3. Interactive Lists: Used for companies and labs. better than static text for exploration.
-         4. Progress Bars: Used in the "Readiness Checklist" to gamify the preparation process.
-         CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. All visuals via Chart.js or Tailwind HTML.
-    -->
-    
+    <!-- Placeholder: Application Structure Plan maintained from previous version -->
+    <!-- Placeholder: Visualization & Content Choices maintained from previous version -->
     <!-- CONFIRMATION: NO SVG graphics used. NO Mermaid JS used. -->
 </head>
+
 <body class="flex flex-col min-h-screen">
 
     <!-- Navigation -->
@@ -99,13 +96,21 @@
         <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
             <div class="flex justify-between h-16">
                 <div class="flex items-center">
-                    <span class="text-2xl font-bold text-slate-800 tracking-tight">Austin<span class="text-sky-500">BME</span> <span class="text-slate-400 font-light hidden sm:inline">| Internship Navigator</span></span>
+                    <span class="text-2xl font-bold text-slate-800 tracking-tight">Austin<span
+                            class="text-sky-500">BME</span> <span class="text-slate-400 font-light hidden sm:inline">|
+                            Internship Navigator</span></span>
                 </div>
                 <div class="flex items-center space-x-4">
-                    <button onclick="scrollToSection('dashboard')" class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">Overview</button>
-                    <button onclick="scrollToSection('opportunities')" class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">Opportunities</button>
-                    <button onclick="scrollToSection('enovis-focus')" class="bg-sky-50 text-sky-700 hover:bg-sky-100 px-3 py-2 rounded-md text-sm font-medium">Enovis Strategy</button>
-                    <button onclick="scrollToSection('action-plan')" class="bg-sky-600 text-white hover:bg-sky-700 px-3 py-2 rounded-md text-sm font-medium">Action Plan</button>
+                    <button onclick="scrollToSection('dashboard')"
+                        class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">Overview</button>
+                    <button onclick="scrollToSection('opportunities')"
+                        class="text-slate-600 hover:text-sky-600 px-3 py-2 rounded-md text-sm font-medium">Opportunities</button>
+                    <button onclick="scrollToSection('enovis-focus')"
+                        class="bg-sky-50 text-sky-700 hover:bg-sky-100 px-3 py-2 rounded-md text-sm font-medium">Enovis
+                        Strategy</button>
+                    <button onclick="scrollToSection('action-plan')"
+                        class="bg-sky-600 text-white hover:bg-sky-700 px-3 py-2 rounded-md text-sm font-medium">Action
+                        Plan</button>
                 </div>
             </div>
         </div>
@@ -113,14 +118,15 @@
 
     <!-- Main Content -->
     <main class="flex-grow">
-        
+
         <!-- SECTION 1: HERO & DASHBOARD -->
         <section id="dashboard" class="py-12 bg-white">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
                 <div class="text-center mb-12">
                     <h1 class="text-4xl font-bold text-slate-900 mb-4">Research Pathways in Austin, TX</h1>
                     <p class="text-lg text-slate-600 max-w-2xl mx-auto">
-                        For a Junior BME at Texas A&M, Austin offers a unique blend of established medical device giants and a booming academic research sector.
+                        For a Junior BME at Texas A&M, Austin offers a unique blend of established medical device giants
+                        and a booming academic research sector.
                         Here is your command center for navigating the ecosystem.
                     </p>
                 </div>
@@ -130,21 +136,27 @@
                     <div class="bg-slate-50 p-6 rounded-xl border border-slate-200">
                         <h2 class="text-xl font-semibold text-slate-800 mb-4">The Austin Landscape</h2>
                         <p class="text-slate-600 mb-4">
-                            Unlike Houston (Medical Center focus) or Dallas (Corporate HQs), Austin's bio-sector is defined by 
-                            <strong class="text-sky-600">Medical Devices</strong> (Orthopedics, Spine) and <strong class="text-teal-600">High-Tech Bio</strong> (Bioinformatics, Wearables).
+                            Unlike Houston (Medical Center focus) or Dallas (Corporate HQs), Austin's bio-sector is
+                            defined by
+                            <strong class="text-sky-600">Medical Devices</strong> (Orthopedics, Spine) and <strong
+                                class="text-teal-600">High-Tech Bio</strong> (Bioinformatics, Wearables).
                         </p>
                         <div class="space-y-4">
                             <div class="flex items-center justify-between p-3 bg-white rounded shadow-sm">
                                 <span class="font-medium text-slate-700">Industry (Medical Device)</span>
-                                <span class="text-xs font-bold bg-sky-100 text-sky-800 px-2 py-1 rounded">High Competition</span>
+                                <span class="text-xs font-bold bg-sky-100 text-sky-800 px-2 py-1 rounded">High
+                                    Competition</span>
                             </div>
                             <div class="flex items-center justify-between p-3 bg-white rounded shadow-sm">
                                 <span class="font-medium text-slate-700">Academic (UT Austin/Dell Med)</span>
-                                <span class="text-xs font-bold bg-teal-100 text-teal-800 px-2 py-1 rounded">High Opportunity</span>
+                                <span class="text-xs font-bold bg-teal-100 text-teal-800 px-2 py-1 rounded">High
+                                    Opportunity</span>
                             </div>
                             <div class="flex items-center justify-between p-3 bg-white rounded shadow-sm">
                                 <span class="font-medium text-slate-700">Startups (Capital Factory)</span>
-                                <span class="text-xs font-bold bg-purple-100 text-purple-800 px-2 py-1 rounded">Networking Heavy</span>
+                                <span
+                                    class="text-xs font-bold bg-purple-100 text-purple-800 px-2 py-1 rounded">Networking
+                                    Heavy</span>
                             </div>
                         </div>
                     </div>
@@ -154,7 +166,8 @@
                         <div class="chart-container">
                             <canvas id="landscapeChart"></canvas>
                         </div>
-                        <p class="text-center text-xs text-slate-400 mt-2">Relative distribution of BME-relevant research roles in Austin</p>
+                        <p class="text-center text-xs text-slate-400 mt-2">Relative distribution of BME-relevant
+                            research roles in Austin</p>
                     </div>
                 </div>
             </div>
@@ -167,13 +180,18 @@
                     <div>
                         <h2 class="text-3xl font-bold text-slate-900">Opportunity Explorer</h2>
                         <p class="text-slate-600 mt-2 max-w-2xl">
-                            Toggle between Industry (Corporate R&D) and Academic (University Labs). Both are valid for "Research" credit, but recruitment styles differ.
+                            Toggle between Industry (Corporate R&D) and Academic (University Labs). Click "View
+                            Strategy" to see how to approach them.
                         </p>
                     </div>
                     <!-- Toggle Controls -->
                     <div class="bg-white p-1 rounded-lg border border-slate-300 inline-flex mt-4 md:mt-0">
-                        <button id="btn-industry" onclick="toggleOpportunities('industry')" class="px-4 py-2 text-sm font-medium rounded-md bg-sky-500 text-white shadow-sm transition-colors">Industry Giants</button>
-                        <button id="btn-academic" onclick="toggleOpportunities('academic')" class="px-4 py-2 text-sm font-medium rounded-md text-slate-600 hover:bg-slate-100 transition-colors">UT & Academic Labs</button>
+                        <button id="btn-industry" onclick="toggleOpportunities('industry')"
+                            class="px-4 py-2 text-sm font-medium rounded-md bg-sky-500 text-white shadow-sm transition-colors">Industry
+                            Giants</button>
+                        <button id="btn-academic" onclick="toggleOpportunities('academic')"
+                            class="px-4 py-2 text-sm font-medium rounded-md text-slate-600 hover:bg-slate-100 transition-colors">UT
+                            & Academic Labs</button>
                     </div>
                 </div>
 
@@ -187,26 +205,32 @@
         <!-- SECTION 3: ENOVIS DEEP DIVE -->
         <section id="enovis-focus" class="py-12 bg-white border-t border-slate-200">
             <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-                <div class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
+                <div
+                    class="bg-gradient-to-br from-slate-900 to-slate-800 rounded-2xl p-8 text-white shadow-xl relative overflow-hidden">
                     <div class="absolute top-0 right-0 p-12 opacity-10">
                         <span class="text-9xl font-bold">E</span>
                     </div>
-                    
+
                     <div class="relative z-10">
                         <div class="flex items-center space-x-3 mb-6">
-                            <span class="px-3 py-1 bg-sky-500 text-xs font-bold rounded uppercase tracking-wider">Primary Target</span>
+                            <span
+                                class="px-3 py-1 bg-sky-500 text-xs font-bold rounded uppercase tracking-wider">Primary
+                                Target</span>
                             <h2 class="text-3xl font-bold">Cracking Enovis (Austin)</h2>
                         </div>
-                        
+
                         <div class="grid grid-cols-1 lg:grid-cols-3 gap-8">
                             <!-- Left Column: The Intel -->
                             <div class="col-span-2">
-                                <h3 class="text-xl font-semibold mb-4 text-sky-300">The "Surgical & Foot/Ankle" Focus</h3>
+                                <h3 class="text-xl font-semibold mb-4 text-sky-300">The "Surgical & Foot/Ankle" Focus
+                                </h3>
                                 <p class="text-slate-300 mb-6 leading-relaxed">
-                                    Enovis (formerly DJO Global) in Austin has a heavy footprint in <strong>Reconstructive Surgery</strong> and <strong>Orthopedics</strong>. 
-                                    As a BME Junior, generic applications often fail. You need to tailor your narrative to <em>Biomechanics, Material Science, and FDA Quality Controls</em>.
+                                    Enovis (formerly DJO Global) in Austin has a heavy footprint in
+                                    <strong>Reconstructive Surgery</strong> and <strong>Orthopedics</strong>.
+                                    As a BME Junior, generic applications often fail. You need to tailor your narrative
+                                    to <em>Biomechanics, Material Science, and FDA Quality Controls</em>.
                                 </p>
-                                
+
                                 <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
                                     <div class="bg-slate-700/50 p-4 rounded-lg border border-slate-600">
                                         <h4 class="font-bold text-sky-400 mb-2">Key Keywords for Resume</h4>
@@ -220,9 +244,12 @@
                                     <div class="bg-slate-700/50 p-4 rounded-lg border border-slate-600">
                                         <h4 class="font-bold text-sky-400 mb-2">How to Network</h4>
                                         <ul class="text-sm text-slate-300 space-y-1">
-                                            <li class="flex items-start"><span class="mr-2">🔹</span>Find "R&D Engineers" at Enovis Austin on LinkedIn.</li>
-                                            <li class="flex items-start"><span class="mr-2">🔹</span>Message Aggies alumni specifically ("Howdy! Junior BME here...").</li>
-                                            <li class="flex items-start"><span class="mr-2">🔹</span>Ask about their "STAR" internship program cycles.</li>
+                                            <li class="flex items-start"><span class="mr-2">🔹</span>Find "R&D
+                                                Engineers" at Enovis Austin on LinkedIn.</li>
+                                            <li class="flex items-start"><span class="mr-2">🔹</span>Message Aggies
+                                                alumni specifically ("Howdy! Junior BME here...").</li>
+                                            <li class="flex items-start"><span class="mr-2">🔹</span>Ask about their
+                                                "STAR" internship program cycles.</li>
                                         </ul>
                                     </div>
                                 </div>
@@ -230,7 +257,8 @@
 
                             <!-- Right Column: Skills Radar -->
                             <div class="bg-white/5 rounded-xl p-4 flex flex-col items-center justify-center">
-                                <h4 class="text-sm font-semibold text-slate-300 mb-2 text-center">Ideal Candidate Profile vs. Avg Student</h4>
+                                <h4 class="text-sm font-semibold text-slate-300 mb-2 text-center">Ideal Candidate
+                                    Profile vs. Avg Student</h4>
                                 <div class="chart-container" style="height: 250px;">
                                     <canvas id="enovisRadarChart"></canvas>
                                 </div>
@@ -247,16 +275,23 @@
                 <div class="mb-10">
                     <h2 class="text-3xl font-bold text-slate-900">Strategic Timeline</h2>
                     <p class="text-slate-600 mt-2">
-                        Landing a role requires synchronization with recruitment cycles. Use this interactive timeline to check your status.
+                        Landing a role requires synchronization with recruitment cycles. Use this interactive timeline
+                        to check your status.
                     </p>
                 </div>
 
                 <!-- Timeline Controls -->
                 <div class="flex justify-center mb-8">
                     <div class="bg-white rounded-full shadow p-1 flex space-x-2">
-                        <button onclick="updateTimeline('now')" class="timeline-btn active px-6 py-2 rounded-full text-sm font-medium bg-sky-500 text-white transition-all">Now (Nov/Dec)</button>
-                        <button onclick="updateTimeline('early_spring')" class="timeline-btn px-6 py-2 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-100 transition-all">Early Spring (Jan/Feb)</button>
-                        <button onclick="updateTimeline('late_spring')" class="timeline-btn px-6 py-2 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-100 transition-all">Late Spring (Mar/Apr)</button>
+                        <button onclick="updateTimeline('now')"
+                            class="timeline-btn active px-6 py-2 rounded-full text-sm font-medium bg-sky-500 text-white transition-all">Now
+                            (Nov/Dec)</button>
+                        <button onclick="updateTimeline('early_spring')"
+                            class="timeline-btn px-6 py-2 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-100 transition-all">Early
+                            Spring (Jan/Feb)</button>
+                        <button onclick="updateTimeline('late_spring')"
+                            class="timeline-btn px-6 py-2 rounded-full text-sm font-medium text-slate-600 hover:bg-slate-100 transition-all">Late
+                            Spring (Mar/Apr)</button>
                     </div>
                 </div>
 
@@ -265,7 +300,8 @@
                     <div id="timeline-content" class="grid grid-cols-1 md:grid-cols-2 gap-8 animate-fade-in">
                         <!-- Left: Tasks -->
                         <div>
-                            <h3 id="timeline-title" class="text-xl font-bold text-slate-800 mb-4">Winter Break Grind</h3>
+                            <h3 id="timeline-title" class="text-xl font-bold text-slate-800 mb-4">Winter Break Grind
+                            </h3>
                             <ul id="timeline-tasks" class="space-y-4">
                                 <!-- Tasks injected via JS -->
                             </ul>
@@ -274,12 +310,15 @@
                         <div class="bg-sky-50 rounded-lg p-6 border border-sky-100">
                             <h4 class="text-sm font-bold text-sky-800 uppercase tracking-wide mb-2">Priority Focus</h4>
                             <p id="timeline-focus" class="text-slate-700 italic text-lg">
-                                "This is the 'Preparation Phase'. Most corporate deadlines are closing, but academic labs are just starting to think about Summer. Polish the portfolio."
+                                "This is the 'Preparation Phase'. Most corporate deadlines are closing, but academic
+                                labs are just starting to think about Summer. Polish the portfolio."
                             </p>
                             <div class="mt-6">
-                                <span class="text-xs font-semibold text-slate-500 block mb-1">Applications Open Status</span>
+                                <span class="text-xs font-semibold text-slate-500 block mb-1">Applications Open
+                                    Status</span>
                                 <div class="w-full bg-slate-200 rounded-full h-2.5">
-                                    <div id="progress-bar-fill" class="bg-sky-500 h-2.5 rounded-full" style="width: 40%"></div>
+                                    <div id="progress-bar-fill" class="bg-sky-500 h-2.5 rounded-full"
+                                        style="width: 40%"></div>
                                 </div>
                                 <div class="flex justify-between text-xs text-slate-500 mt-1">
                                     <span>Just Starting</span>
@@ -294,6 +333,46 @@
         </section>
 
     </main>
+
+    <!-- DETAILS MODAL -->
+    <div id="details-modal"
+        class="fixed inset-0 bg-slate-900/50 backdrop-blur-sm hidden z-[100] flex items-center justify-center p-4">
+        <div class="bg-white rounded-xl shadow-2xl max-w-lg w-full transform transition-all scale-95 opacity-0"
+            id="modal-content">
+            <div class="p-6">
+                <div class="flex justify-between items-start mb-4">
+                    <h3 id="modal-title" class="text-xl font-bold text-slate-900">Company Name</h3>
+                    <button onclick="closeModal()" class="text-slate-400 hover:text-slate-600">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+                                d="M6 18L18 6M6 6l12 12"></path>
+                        </svg>
+                    </button>
+                </div>
+
+                <div class="space-y-4">
+                    <div class="bg-sky-50 p-3 rounded-lg border border-sky-100">
+                        <span class="text-xs font-bold text-sky-700 uppercase">Strategy Tip</span>
+                        <p id="modal-strategy" class="text-sm text-slate-700 mt-1">Specific advice goes here.</p>
+                    </div>
+
+                    <div>
+                        <span class="text-xs font-semibold text-slate-500">Key Focus Areas</span>
+                        <div id="modal-tags" class="flex flex-wrap gap-2 mt-2">
+                            <!-- Tags injected -->
+                        </div>
+                    </div>
+
+                    <div class="pt-4 border-t border-slate-100 flex justify-end">
+                        <a id="modal-link" href="#" target="_blank"
+                            class="px-4 py-2 bg-slate-800 text-white text-sm font-medium rounded hover:bg-slate-700 transition-colors">
+                            Visit Career Page
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 
     <!-- Footer -->
     <footer class="bg-slate-900 text-slate-400 py-8">
@@ -313,6 +392,7 @@
                     location: "North Austin",
                     tags: ["Orthopedics", "Surgical", "Rehab"],
                     desc: "A leader in orthopedic devices. Look for 'R&D Intern' or 'Quality Engineering Intern' roles. High value on CAD and mechanical testing.",
+                    strategy: "Don't just apply online. Mention 'STAR Internship' in your cover letter. Highlight any course projects involving SolidWorks or Instron testing.",
                     link: "https://www.enovis.com/careers"
                 },
                 {
@@ -320,28 +400,32 @@
                     location: "North Austin",
                     tags: ["Cardio", "Neuromodulation"],
                     desc: "Major hub for Neuromodulation. Very competitive. Focus on electrical/neural engineering aspects of BME.",
-                    link: "#"
+                    strategy: "Abbott recruits heavily in Fall, but Spring postings exist. Emphasize data analysis (Python/MATLAB) as Neuromod uses heavy signal processing.",
+                    link: "https://www.abbott.com/careers.html"
                 },
                 {
                     name: "Stryker",
                     location: "Remote/Travel (Austin Sales/Support)",
                     tags: ["MedSurg", "Neurotech"],
                     desc: "While R&D is huge elsewhere, Austin has field clinical engineering roles which are great entry points.",
-                    link: "#"
+                    strategy: "Look for 'Field Clinical Engineer' or 'OnSite Specialist' roles. These are great for BMEs who want to be in the OR rather than a lab.",
+                    link: "https://careers.stryker.com/"
                 },
                 {
                     name: "Zimmer Biomet",
                     location: "Austin",
                     tags: ["Robotics", "Joints"],
                     desc: "Strong presence in surgical robotics. Coding skills (Python/C++) are a huge plus here alongside biomechanics.",
-                    link: "#"
+                    strategy: "If you have any robotics or control systems coursework (even basic Arduino projects), highlight them. It separates you from pure biology majors.",
+                    link: "https://careers.zimmerbiomet.com/"
                 },
                 {
                     name: "Hanger Clinic / Hanger, Inc.",
                     location: "North Austin (HQ)",
                     tags: ["Prosthetics", "Orthotics"],
                     desc: "Headquartered in Austin. Incredible for rehab engineering and biomechanics research.",
-                    link: "#"
+                    strategy: "This is HQ. Look for 'Clinical Research' roles specifically. Mention any gait analysis experience.",
+                    link: "https://corporate.hanger.com/careers/"
                 }
             ],
             academic: [
@@ -350,28 +434,32 @@
                     location: "Main Campus",
                     tags: ["Tissue Eng", "Imaging", "Nano"],
                     desc: "Apply to REU programs or email professors directly. Look for labs in the Cockrell School of Engineering.",
-                    link: "#"
+                    strategy: "Read 1 abstract from the prof before emailing. Subject line: 'Texas A&M Junior BME Inquiry: Your research on [Topic]'",
+                    link: "https://bme.utexas.edu/research"
                 },
                 {
                     name: "Dell Medical School",
                     location: "Downtown Austin",
                     tags: ["Clinical Research", "Health Data"],
                     desc: "Focus on clinical outcomes and health tech. Great for data analysis skills (Python/R).",
-                    link: "#"
+                    strategy: "Look for 'Research Assistant' roles in the 'Department of Surgery and Perioperative Care'.",
+                    link: "https://dellmed.utexas.edu/"
                 },
                 {
                     name: "Texas Biologics",
                     location: "UT Austin",
                     tags: ["Therapeutics", "Drug Delivery"],
                     desc: "A research hub focusing on advanced biologics. Highly academic and research-intensive.",
-                    link: "#"
+                    strategy: "Very wet-lab heavy. Highlight pipetting, cell culture, or PCR skills immediately.",
+                    link: "https://research.utexas.edu/"
                 },
                 {
                     name: "Oden Institute",
                     location: "UT Austin",
                     tags: ["Computational", "Modeling"],
                     desc: "World class computational medicine. If you know MATLAB/Python, this is a gold mine.",
-                    link: "#"
+                    strategy: "Attach a GitHub link to your email. They care about your code quality more than your biology knowledge.",
+                    link: "https://www.oden.utexas.edu/"
                 }
             ]
         };
@@ -411,19 +499,22 @@
             }
         };
 
+        let currentType = 'industry'; // Track current view for modal index mapping
+
         // --- RENDER FUNCTIONS ---
 
         function renderOpportunities(type) {
+            currentType = type;
             const grid = document.getElementById('opportunity-grid');
             grid.innerHTML = ''; // Clear current
-            
+
             const data = opportunitiesData[type];
-            
-            data.forEach(item => {
+
+            data.forEach((item, index) => {
                 const card = document.createElement('div');
                 card.className = "bg-white p-6 rounded-xl border border-slate-200 interactive-card flex flex-col justify-between h-full";
-                
-                let tagsHtml = item.tags.map(tag => 
+
+                let tagsHtml = item.tags.map(tag =>
                     `<span class="text-xs font-semibold bg-slate-100 text-slate-600 px-2 py-1 rounded-full">${tag}</span>`
                 ).join('');
 
@@ -439,8 +530,8 @@
                         </div>
                         <p class="text-sm text-slate-600 mb-4">${item.desc}</p>
                     </div>
-                    <button class="w-full mt-auto py-2 text-sm text-sky-600 font-medium border border-sky-200 rounded hover:bg-sky-50 transition-colors">
-                        View Details
+                    <button onclick="openModal(${index})" class="w-full mt-auto py-2 text-sm text-sky-600 font-medium border border-sky-200 rounded hover:bg-sky-50 transition-colors">
+                        View Strategy & Link
                     </button>
                 `;
                 grid.appendChild(card);
@@ -448,10 +539,9 @@
         }
 
         function toggleOpportunities(type) {
-            // Button Styles
             const btnInd = document.getElementById('btn-industry');
             const btnAca = document.getElementById('btn-academic');
-            
+
             if (type === 'industry') {
                 btnInd.className = "px-4 py-2 text-sm font-medium rounded-md bg-sky-500 text-white shadow-sm transition-colors";
                 btnAca.className = "px-4 py-2 text-sm font-medium rounded-md text-slate-600 hover:bg-slate-100 transition-colors";
@@ -459,39 +549,74 @@
                 btnAca.className = "px-4 py-2 text-sm font-medium rounded-md bg-teal-500 text-white shadow-sm transition-colors";
                 btnInd.className = "px-4 py-2 text-sm font-medium rounded-md text-slate-600 hover:bg-slate-100 transition-colors";
             }
-            
+
             renderOpportunities(type);
         }
 
+        // --- MODAL FUNCTIONS ---
+        function openModal(index) {
+            const item = opportunitiesData[currentType][index];
+
+            document.getElementById('modal-title').innerText = item.name;
+            document.getElementById('modal-strategy').innerText = item.strategy;
+            document.getElementById('modal-link').href = item.link;
+
+            const tagsContainer = document.getElementById('modal-tags');
+            tagsContainer.innerHTML = item.tags.map(tag =>
+                `<span class="text-xs font-semibold bg-slate-100 text-slate-600 px-2 py-1 rounded-full">${tag}</span>`
+            ).join('');
+
+            const modal = document.getElementById('details-modal');
+            const content = document.getElementById('modal-content');
+
+            modal.classList.remove('hidden');
+            setTimeout(() => {
+                content.classList.remove('scale-95', 'opacity-0');
+                content.classList.add('scale-100', 'opacity-100');
+            }, 10);
+        }
+
+        function closeModal() {
+            const modal = document.getElementById('details-modal');
+            const content = document.getElementById('modal-content');
+
+            content.classList.remove('scale-100', 'opacity-100');
+            content.classList.add('scale-95', 'opacity-0');
+
+            setTimeout(() => {
+                modal.classList.add('hidden');
+            }, 200);
+        }
+
+        // Close modal when clicking outside
+        document.getElementById('details-modal').addEventListener('click', function (e) {
+            if (e.target === this) {
+                closeModal();
+            }
+        });
+
+        // --- TIMELINE LOGIC ---
         function updateTimeline(phase) {
-            // Updated Logic: Find button by selector instead of relying on event.target
-            // This prevents crashes when called programmatically on load
             const buttons = document.querySelectorAll('.timeline-btn');
-            
-            // 1. Reset all buttons
+
             buttons.forEach(btn => {
                 btn.classList.remove('bg-sky-500', 'text-white', 'active');
                 btn.classList.add('text-slate-600', 'hover:bg-slate-100');
             });
 
-            // 2. Find and highlight the specific button for this phase
-            // We use the onclick attribute to identify the correct button
             const activeButton = document.querySelector(`button[onclick*="'${phase}'"]`);
             if (activeButton) {
                 activeButton.classList.remove('text-slate-600', 'hover:bg-slate-100');
                 activeButton.classList.add('bg-sky-500', 'text-white', 'active');
             }
 
-            // Update Content with animation reset
-            const container = document.getElementById('timeline-content');
-            
             const data = timelineData[phase];
             document.getElementById('timeline-title').innerText = data.title;
             document.getElementById('timeline-focus').innerText = `"${data.focus}"`;
             document.getElementById('progress-bar-fill').style.width = `${data.progress}%`;
-            
+
             const taskList = document.getElementById('timeline-tasks');
-            taskList.innerHTML = data.tasks.map(task => 
+            taskList.innerHTML = data.tasks.map(task =>
                 `<li class="flex items-start text-slate-700 text-sm">
                     <span class="mr-3 text-sky-500 font-bold">→</span>
                     <span>${task}</span>
@@ -505,10 +630,8 @@
 
         // --- CHARTS INITIALIZATION ---
         document.addEventListener('DOMContentLoaded', () => {
-            // 1. Initial Render of Opportunities
             renderOpportunities('industry');
 
-            // 2. Landscape Chart (Doughnut)
             const ctx1 = document.getElementById('landscapeChart').getContext('2d');
             new Chart(ctx1, {
                 type: 'doughnut',
@@ -529,7 +652,6 @@
                 }
             });
 
-            // 3. Enovis Radar Chart
             const ctx2 = document.getElementById('enovisRadarChart').getContext('2d');
             new Chart(ctx2, {
                 type: 'radar',
@@ -572,11 +694,11 @@
                     }
                 }
             });
-            
-            // Set initial timeline - safely calls new logic
+
             updateTimeline('now');
         });
 
     </script>
 </body>
+
 </html>
